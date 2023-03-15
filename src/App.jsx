@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import imagenCripto from '../src/img/imagen-criptos.png';
 import Formulario from './components/Form/Formulario';
@@ -40,17 +40,28 @@ const Imagen = styled.img`
 `;
 
 function App() {
+  const [datosSubmit, setDatosSubmit] = useState({});
+
+
+  useEffect(() => {
+    if (Object.keys(datosSubmit).length > 0) {
+      console.log(datosSubmit);
+    }
+  }, [datosSubmit])
+
 
   return (
     <div className="App">
       <Contenedor>
-        <Imagen 
+        <Imagen
           src={imagenCripto}
-          alt="Imagenes CriptoMonedas" 
+          alt="Imagenes CriptoMonedas"
         />
         <div>
           <Heading>Cotiza criptomonedas al instante</Heading>
-          <Formulario />
+          <Formulario
+            setDatosSubmit={setDatosSubmit}
+          />
         </div>
       </Contenedor>
     </div>

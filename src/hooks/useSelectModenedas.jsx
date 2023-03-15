@@ -24,7 +24,7 @@ const useSelectOptions = (label, options) => {
       <Label>{label}</Label>
       <Select
         value={state}
-        onChange={ e => setState(e.target.value)}
+        onChange={e => setState(e.target.value)}
       >
         <option value="" >Seleccione una opcion</option>
         {options?.map((opcion) => (
