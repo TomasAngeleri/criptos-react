@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import imagenCripto from '../src/img/imagen-criptos.png';
 import Formulario from './components/Form/Formulario';
+import DetalleCotizacion from './components/DetalleCotizacion';
 
 const Heading = styled.h1`
   font-family: 'Lato', sans-serif;
@@ -41,11 +42,22 @@ const Imagen = styled.img`
 
 function App() {
   const [datosSubmit, setDatosSubmit] = useState({});
-
+  const [resultCotizacion, setResultCotizacion] = useState({});
 
   useEffect(() => {
     if (Object.keys(datosSubmit).length > 0) {
+      const cotizarCripto = async () => {
+        const { criptoElegida, monedaElegida } = datosSubmit;
+        const urlFullData = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptoElegida}&tsyms=${monedaElegida}`
+
+        const respuesta = await fetch(urlFullData);
+        const result = await respuesta.json();
+        const dataFullCripto = result.DISPLAY[criptoElegida][monedaElegida];
+        setResultCotizacion(dataFullCripto)
+
+      };
       console.log(datosSubmit);
+      cotizarCripto();
     }
   }, [datosSubmit])
 
@@ -62,6 +74,7 @@ function App() {
           <Formulario
             setDatosSubmit={setDatosSubmit}
           />
+          {resultCotizacion.PRICE && <DetalleCotizacion resultCotizacion={resultCotizacion} />}
         </div>
       </Contenedor>
     </div>

@@ -9,6 +9,7 @@ const Texto = styled.div`
   font-family: 'Lato', sans-serif;
   font-weight:700;
   text-align:center;
+  border-radius: 8px;
 `;
 
 const Error = ({ children }) => {
