@@ -26,14 +26,13 @@ const Texto = styled.p`
 `;
 
 const TextoPrecio = styled.p`
-  font-size: 24px;
+  font-size: 23px;
   span {
     font-weight:700;
   }
 `;
 
 const DetalleCotizacion = ({ resultCotizacion }) => {
-  console.log('DetalleCotizacion', resultCotizacion);
   const { PRICE, LOWDAY, HIGHDAY, CHANGEPCT24HOUR, IMAGEURL, LASTUPDATE } = resultCotizacion;
   return (
     <Detalle>

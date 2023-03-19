@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import imagenCripto from '../src/img/imagen-criptos.png';
 import Formulario from './components/Form/Formulario';
 import DetalleCotizacion from './components/DetalleCotizacion';
+import Spinner from './components/Spinner';
 
 const Heading = styled.h1`
   font-family: 'Lato', sans-serif;
@@ -24,7 +25,7 @@ const Heading = styled.h1`
 `;
 
 const Contenedor = styled.div`
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   @media (min-width: 992px){
     display: grid;
@@ -43,9 +44,11 @@ const Imagen = styled.img`
 function App() {
   const [datosSubmit, setDatosSubmit] = useState({});
   const [resultCotizacion, setResultCotizacion] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Object.keys(datosSubmit).length > 0) {
+      setLoading(true)
       const cotizarCripto = async () => {
         const { criptoElegida, monedaElegida } = datosSubmit;
         const urlFullData = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptoElegida}&tsyms=${monedaElegida}`
@@ -54,9 +57,9 @@ function App() {
         const result = await respuesta.json();
         const dataFullCripto = result.DISPLAY[criptoElegida][monedaElegida];
         setResultCotizacion(dataFullCripto)
-
+        setLoading(false);
       };
-      console.log(datosSubmit);
+
       cotizarCripto();
     }
   }, [datosSubmit])
@@ -74,7 +77,8 @@ function App() {
           <Formulario
             setDatosSubmit={setDatosSubmit}
           />
-          {resultCotizacion.PRICE && <DetalleCotizacion resultCotizacion={resultCotizacion} />}
+          {loading && <Spinner />}
+          {resultCotizacion.PRICE && !loading && <DetalleCotizacion resultCotizacion={resultCotizacion} />}
         </div>
       </Contenedor>
     </div>
