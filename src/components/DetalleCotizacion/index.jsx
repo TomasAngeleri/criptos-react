@@ -39,10 +39,10 @@ const DetalleCotizacion = ({ resultCotizacion }) => {
       <Imagen src={`https://cryptocompare.com/${IMAGEURL}`} alt="Imagen Criptomoneda" />
       <div>
         <TextoPrecio>El precio es de: <span>{PRICE}</span> </TextoPrecio>
-        <Texto>Precio mas alto del dia: <span>{HIGHDAY}</span> </Texto>
-        <Texto>Precio mas bajo del dia: <span>{LOWDAY}</span> </Texto>
-        <Texto>Variacion ultimas 24 horas: <span>{CHANGEPCT24HOUR}</span> </Texto>
-        <Texto>Ultima actualizacion realiza: <span>{LASTUPDATE}</span> </Texto>
+        <Texto>Precio más alto del dia: <span>{HIGHDAY}</span> </Texto>
+        <Texto>Precio más bajo del dia: <span>{LOWDAY}</span> </Texto>
+        <Texto>Variación ultimas 24 horas: <span>{CHANGEPCT24HOUR}</span>% </Texto>
+        <Texto>Última actualización realiza: <span>{LASTUPDATE}</span> </Texto>
       </div>
     </Detalle>
   );
